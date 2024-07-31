@@ -11,6 +11,7 @@ import "./App.css";
 
 
 
+
 function App() {
  
 
@@ -20,6 +21,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+      
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           

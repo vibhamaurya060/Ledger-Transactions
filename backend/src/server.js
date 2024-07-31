@@ -3,10 +3,10 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const ledgerRoutes = require('./routes/ledgerRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
-const pdfRoutes = require('./routes/pdfRoutes');
+
 
 require('dotenv').config();
-const cors =require('cors')
+const cors =require('cors');
 
 const app = express();
 
@@ -24,9 +24,9 @@ app.get('/',(req,res)=>{
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/ledgers', ledgerRoutes);
+app.use('/api/ledgers',  ledgerRoutes);
 app.use('/api/transactions', transactionRoutes);
-app.use('/api/pdf', pdfRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 

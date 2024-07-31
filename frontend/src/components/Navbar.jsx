@@ -26,9 +26,10 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-brand">
-        <Link to="/">Home</Link>
+        <Link to="/">Dashboard</Link>
       </div>
       <ul className="nav-items">
+       
         {isAuthenticated ? (
           <li>
             <button className="logout-button" onClick={handleLogout}>

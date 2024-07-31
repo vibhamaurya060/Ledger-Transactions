@@ -1,59 +1,74 @@
-// src/components/Dashboard.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import LedgerTransaction from './LedgerTransaction'; 
+import '../style/Dashboard.css'; 
 
 const Dashboard = () => {
   const [ledgers, setLedgers] = useState([]);
   const [selectedLedger, setSelectedLedger] = useState(null);
-  const [transactions, setTransactions] = useState([]);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchLedgers = async () => {
-      const response = await axios.get('http://localhost:8080/api/ledgers');
-      setLedgers(response.data);
+      setLoading(true);
+      try {
+        const response = await axios.get('http://localhost:8080/api/ledgers');
+        setLedgers(response.data);
+      } catch (err) {
+        setError('Failed to fetch ledgers');
+      } finally {
+        setLoading(false);
+      }
     };
+
     fetchLedgers();
   }, []);
 
-  const handleLedgerSelect = async (ledgerId) => {
-    setSelectedLedger(ledgerId);
-    const response = await axios.get(`http://localhost:8080/api/transactions?ledgerId=${ledgerId}`);
-    setTransactions(response.data);
+  const handleLedgerSelect = (ledger) => {
+    setSelectedLedger(ledger);
   };
 
-  const handleFilter = async () => {
-    if (selectedLedger) {
-      const response = await axios.get(`http://localhost:8080/api/transactions?ledgerId=${selectedLedger}&startDate=${startDate}&endDate=${endDate}`);
-      setTransactions(response.data);
-    }
+  const closeModal = () => {
+    setSelectedLedger(null);
   };
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <h2>Ledgers</h2>
-      <ul>
-        {ledgers.map((ledger) => (
-          <li key={ledger._id} onClick={() => handleLedgerSelect(ledger._id)}>
-            {ledger.name}
-          </li>
-        ))}
-      </ul>
+    <div className="dashboard-container">
+      <h1 className="dashboard-heading">Ledger Dashboard</h1>
+      
+      {loading ? (
+        <p className="loader">Loading...</p>
+      ) : error ? (
+        <p className="error-message">{error}</p>
+      ) : (
+        <ul className="ledger-list">
+          {ledgers.map((ledger) => (
+            <li
+              key={ledger._id}
+              onClick={() => handleLedgerSelect(ledger)}
+              className={`ledger-item ${selectedLedger && selectedLedger._id === ledger._id ? 'selected' : ''}`}
+            >
+              <div>
+                <strong>{ledger.name}</strong>
+                <p>{ledger.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+
       {selectedLedger && (
-        <div>
-          <h2>Transactions</h2>
-          <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-          <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-          <button onClick={handleFilter}>Filter</button>
-          <ul>
-            {transactions.map((transaction) => (
-              <li key={transaction._id}>
-                {transaction.date} - {transaction.description} - {transaction.amount} - {transaction.transactionType}
-              </li>
-            ))}
-          </ul>
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2>Ledger Transactions</h2>
+              <button className="close-button" onClick={closeModal}>&times;</button>
+            </div>
+            <div className="modal-body">
+              <LedgerTransaction ledgerId={selectedLedger._id} closeModal={closeModal} />
+            </div>
+          </div>
         </div>
       )}
     </div>
