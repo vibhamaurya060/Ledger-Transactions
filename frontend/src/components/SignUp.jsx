@@ -16,7 +16,7 @@ const SignUp = () => {
         console.log('Submitting:', { username, email, password, role });
       
         try {
-            const response = await axios.post('http://localhost:8080/api/auth/register', {
+            const response = await axios.post('https://ledger-transactions.onrender.com/api/auth/register', {
                 username,
                 email,
                 password,

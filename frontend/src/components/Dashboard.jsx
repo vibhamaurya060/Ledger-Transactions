@@ -13,7 +13,7 @@ const Dashboard = () => {
     const fetchLedgers = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:8080/api/ledgers');
+        const response = await axios.get('https://ledger-transactions.onrender.com/api/ledgers');
         setLedgers(response.data);
       } catch (err) {
         setError('Failed to fetch ledgers');

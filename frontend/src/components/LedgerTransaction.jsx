@@ -15,7 +15,7 @@ const LedgerTransaction = ({ closeModal }) => {
     // Fetch list of ledgers
     const fetchLedgers = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/ledgers');
+        const response = await axios.get('https://ledger-transactions.onrender.com/api/ledgers');
         setLedgers(response.data);
       } catch (err) {
         setError('Failed to fetch ledgers');
@@ -31,7 +31,7 @@ const LedgerTransaction = ({ closeModal }) => {
     const fetchTransactions = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:8080/api/transactions', {
+        const response = await axios.get('https://ledger-transactions.onrender.com/api/transactions', {
           params: {
             ledgerId: selectedLedger,
             startDate,
