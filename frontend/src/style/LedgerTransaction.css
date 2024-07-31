@@ -1,122 +1,56 @@
+/* LedgerTransaction.css */
 
-
-.ledger-transaction-container {
-  width: 90%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 25px;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid #d5aaaa;
-  margin-top: 20%;
-}
-
-.close-modal {
-  background-color: #e74c3c;
-  color: #ffffff;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 600;
-  float: right;
-  margin-bottom: 20px;
-  transition: background-color 0.3s ease;
+.transactions-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
   
-}
-
-.close-modal:hover {
-  background-color: #c0392b;
-}
-
-.ledger-transaction-heading {
-  font-size: 28px;
-  color: #2c3e50;
-  margin-bottom: 25px;
-  text-align: center;
-  font-weight: 700;
-}
-
-.date-filter {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 25px;
-}
-
-.date-input {
-  border: 1px solid #bdc3c7;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 16px;
-  font-family: 'Arial', sans-serif;
-}
-
-.filter-button {
-  background-color: #1abc9c;
-  color: #ffffff;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-}
-
-.filter-button:hover {
-  background-color: #16a085;
-}
-
-.loader {
-  font-size: 20px;
-  color: #1abc9c;
-  text-align: center;
-}
-
-.error-message {
-  font-size: 20px;
-  color: #e74c3c;
-  text-align: center;
-}
-
-.transaction-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.transaction-table th,
-.transaction-table td {
-  padding: 15px;
-  text-align: left;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.transaction-table th {
-  background-color: #1abc9c;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.transaction-table td {
-  font-size: 15px;
-}
-
-.transaction-table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.transaction-table tr:hover {
-  background-color: #f1f1f1;
-}
-
-.no-transactions {
-  font-size: 20px;
-  color: #7f8c8d;
-  text-align: center;
-  margin-top: 25px;
-}
+  .transactions-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .loader {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+  }
+  
+  .error-message {
+    color: #d9534f;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .transactions-table th,
+  .transactions-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .transactions-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .transactions-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .transactions-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  

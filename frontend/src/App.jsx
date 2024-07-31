@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import "./App.css";
 import TransactionForm from './components/TransactionForm';
 import LedgerForm from './components/LedgerForm';
+import LedgerTransactions from './components/LedgerTransaction';
 
 
 
@@ -23,8 +24,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<Dashboard />} /> */}
+          <Route path="/transactions/:id" element={<LedgerTransactions />} />
           <Route path="/ledgerForm" element={<LedgerForm/>} />
           <Route path="/transactionForm" element={<TransactionForm />} />
+
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           

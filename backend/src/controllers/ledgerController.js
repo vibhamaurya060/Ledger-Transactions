@@ -23,9 +23,9 @@ exports.getLedgers = async (req, res) => {
 
 
 exports.getLedgerById = async (req, res) => {
-  const { _id } = req.params;
+  const { id } = req.params;
   try {
-    const ledger = await Ledger.findById(_id); 
+    const ledger = await Ledger.findById(id); 
     if (!ledger) {
       return res.status(404).json({ message: 'Ledger not found' }); 
     }

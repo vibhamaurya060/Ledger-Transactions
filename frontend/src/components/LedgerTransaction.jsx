@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import '../style/ledgerTransaction.css';
+import axios from 'axios';
+import '../style/LedgerTransaction.css';
 
-const LedgerTransaction = () => {
+const LedgerTransactions = () => {
   const { ledgerId } = useParams();
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,9 @@ const LedgerTransaction = () => {
     const fetchTransactions = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`https://ledger-transactions.onrender.com/api/transactions/${ledgerId}`);
+        const response = await axios.get('https://ledger-transactions.onrender.com/api/transactions', {
+          params: { ledgerId: ledgerId }
+        });
         setTransactions(response.data);
       } catch (err) {
         setError('Failed to fetch transactions');
@@ -26,29 +28,35 @@ const LedgerTransaction = () => {
   }, [ledgerId]);
 
   return (
-    <div className="ledger-detail-container">
-      <h1 className="ledger-detail-heading">Transactions</h1>
+    <div className="transactions-container">
+      <h1 className="transactions-heading">Transactions for Ledger {ledgerId}</h1>
 
       {loading ? (
         <p className="loader">Loading...</p>
       ) : error ? (
         <p className="error-message">{error}</p>
       ) : (
-        <ul className="transaction-list">
-          {transactions.map((transaction) => (
-            <li key={transaction._id} className="transaction-item">
-              <div>
-                <strong>Date:</strong> {transaction.date}
-                <p><strong>Ledger Name:</strong> {transaction.description}</p>
-                <p><strong>Amount:</strong> {transaction.amount}</p>
-                <p><strong>Transaction Type:</strong> {transaction.transactionType}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <table className="transactions-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions.map((transaction) => (
+              <tr key={transaction._id}>
+                <td>{new Date(transaction.date).toLocaleDateString()}</td>
+                <td>${transaction.amount}</td>
+                <td>{transaction.transactionType}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </div>
   );
 };
 
-export default LedgerTransaction;
+export default LedgerTransactions;

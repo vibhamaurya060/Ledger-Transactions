@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../style/transactionForm.css'; 
+import '../style/transactionForm.css';
 
 // API call function
 const addTransaction = async (transactionData) => {
   try {
-    const response = await axios.post('https://ledger-transactions.onrender.com/api/transactions/', transactionData);
+    const response = await axios.post('https://ledger-transactions.onrender.com/api/transactions', transactionData);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.error || 'Error adding transaction');
@@ -14,26 +14,55 @@ const addTransaction = async (transactionData) => {
 };
 
 // TransactionForm component
-const TransactionForm = ({ ledgerId }) => {
-  const [amount, setAmount] = useState('');
-  const [date, setDate] = useState('');
-  const [description, setDescription] = useState('');
-  const [transactionType, setTransactionType] = useState('Given');
-  const navigate = useNavigate(); // useNavigate for navigation
+const TransactionForm = () => {
+  const [ledgerId, setLedgerId] = useState('66aa48eb4e77d791f75e333e'); 
+  const [ledgerName, setLedgerName] = useState('Ledger2'); 
+  const [amount, setAmount] = useState(800.00); 
+  const [date, setDate] = useState('2024-06-05'); 
+  const [transactionType, setTransactionType] = useState('Taken'); 
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // Reset error state
+
+    // Validation checks
+    if (!amount || isNaN(amount) || amount <= 0) {
+      setError('Please enter a valid positive amount');
+      return;
+    }
+
+    if (!date) {
+      setError('Please select a valid date');
+      return;
+    }
+
+    if (!ledgerName.trim()) {
+      setError('Ledger name cannot be empty');
+      return;
+    }
+
+    // Make the API call
     try {
-      await addTransaction({ ledgerId, date, description, amount, transactionType });
+      await addTransaction({
+        ledgerId,
+        date,
+        ledgerName,
+        amount: parseFloat(amount).toFixed(2), // Convert amount to a float with two decimal places
+        transactionType,
+      });
       navigate(`/ledger/${ledgerId}`); // Use navigate for redirection
     } catch (error) {
       console.error('Failed to add transaction:', error);
+      setError(error.message || 'Failed to add transaction. Please try again.');
     }
   };
 
   return (
     <form className="transaction-form" onSubmit={handleSubmit}>
       <h2>Add Transaction</h2>
+      {error && <p className="error-message">{error}</p>}
       <label>
         Amount:
         <input
@@ -41,6 +70,9 @@ const TransactionForm = ({ ledgerId }) => {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           required
+          min="0.01"
+          step="0.01"
+          placeholder="Enter transaction amount"
         />
       </label>
       <label>
@@ -53,12 +85,13 @@ const TransactionForm = ({ ledgerId }) => {
         />
       </label>
       <label>
-        Description:
+        Ledger Name:
         <input
           type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={ledgerName}
+          onChange={(e) => setLedgerName(e.target.value)}
           required
+          placeholder="Enter Ledger Name"
         />
       </label>
       <label>

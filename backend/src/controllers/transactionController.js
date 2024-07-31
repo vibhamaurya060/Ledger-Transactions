@@ -29,6 +29,9 @@ exports.getAllTransactions = async (req, res) => {
   }
 };
 
+/////////////////////
+
+
 exports.getTransactions = async (req, res) => {
   const { ledgerId, startDate, endDate } = req.query;
 
@@ -41,21 +44,30 @@ exports.getTransactions = async (req, res) => {
   let parsedStartDate, parsedEndDate;
 
   try {
-    parsedStartDate = startDate ? new Date(startDate) : new Date(0); 
-    parsedEndDate = endDate ? new Date(endDate) : new Date();
+    // Set default values if dates are not provided
+    parsedStartDate = startDate ? new Date(startDate) : new Date(0); // January 1, 1970
+    parsedEndDate = endDate ? new Date(endDate) : new Date(); // Current date
 
     // Check if dates are valid
     if (isNaN(parsedStartDate.getTime()) || isNaN(parsedEndDate.getTime())) {
       return res.status(400).json({ error: 'Invalid date format' });
+    }
+
+    // Ensure endDate is not earlier than startDate
+    if (parsedEndDate < parsedStartDate) {
+      return res.status(400).json({ error: 'End date cannot be earlier than start date' });
     }
   } catch (error) {
     return res.status(400).json({ error: 'Invalid date format' });
   }
 
   try {
+    // Cast ledgerId to ObjectId if needed
+    const ledgerObjectId = mongoose.Types.ObjectId(ledgerId);
+
     // Find transactions based on ledgerId and date range
     const transactions = await Transaction.find({
-      ledgerId: ledgerId,
+      ledgerId: ledgerObjectId, // Cast ledgerId to ObjectId
       date: { $gte: parsedStartDate, $lte: parsedEndDate }
     });
 
@@ -70,12 +82,14 @@ exports.getTransactions = async (req, res) => {
   }
 };
 
+
+
 // Get a specific transaction by ID
 exports.getTransactionById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const transaction = await Transaction.findById(id);
+    const transaction = await Transaction.findById({ledgerId:id});
     if (!transaction) {
       return res.status(404).json({ message: 'Transaction not found' });
     }
