@@ -3,7 +3,7 @@ const Transaction = require('../models/Transaction');
 const Ledger = require('../models/Ledger'); 
 
 exports.addTransaction = async (req, res) => {
-  const { ledgerId, date, description, amount, transactionType } = req.body;
+  const { ledgerId, date, ledgerName, amount, transactionType } = req.body;
 
   try {
     // Validate if ledgerId exists
@@ -12,7 +12,7 @@ exports.addTransaction = async (req, res) => {
       return res.status(404).json({ error: 'Ledger not found' });
     }
 
-    const transaction = new Transaction({ ledgerId, date, description, amount, transactionType });
+    const transaction = new Transaction({ ledgerId, date, ledgerName, amount, transactionType });
     await transaction.save();
     res.status(201).json({ message: 'Transaction added successfully', transaction });
   } catch (error) {

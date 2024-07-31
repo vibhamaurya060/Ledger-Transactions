@@ -12,7 +12,7 @@ const TransactionSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
-  description: {
+  ledgerName: {
     type: String,
     required: true,
   },
@@ -22,7 +22,7 @@ const TransactionSchema = new mongoose.Schema({
   },
   transactionType: {
     type: String,
-    enum: ['debit', 'credit'],
+    enum: ['Given', 'Taken'],
     required: true,
   },
   createdAt: {

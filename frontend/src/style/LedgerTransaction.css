@@ -8,8 +8,8 @@
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e0e0;
-  margin-top: 50px;
+  border: 1px solid #d5aaaa;
+  margin-top: 20%;
 }
 
 .close-modal {
@@ -24,6 +24,7 @@
   float: right;
   margin-bottom: 20px;
   transition: background-color 0.3s ease;
+  
 }
 
 .close-modal:hover {
@@ -84,7 +85,7 @@
 .transaction-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 .transaction-table th,

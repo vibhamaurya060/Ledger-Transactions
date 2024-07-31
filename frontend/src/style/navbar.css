@@ -38,12 +38,12 @@
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
-    color: #e0e0e0;
+    color: #f669af;
     transition: color 0.3s ease, transform 0.3s ease;
   }
   
   .nav-items a:hover {
-    color: #f669af; 
+    color: #f352a2; 
     transform: translateY(-2px);
   }
   

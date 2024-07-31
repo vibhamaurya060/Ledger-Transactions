@@ -29,7 +29,16 @@ const Navbar = () => {
         <Link to="/">Dashboard</Link>
       </div>
       <ul className="nav-items">
-       
+      <li>
+          <Link to="/ledgerForm" className="post-blog-link">
+          LedgerForm
+          </Link>
+        </li>
+        <li>
+          <Link to="/transactionForm" className="post-blog-link">
+          TransactionForm
+          </Link>
+        </li>
         {isAuthenticated ? (
           <li>
             <button className="logout-button" onClick={handleLogout}>
