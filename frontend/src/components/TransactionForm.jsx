@@ -6,7 +6,7 @@ import '../style/transactionForm.css';
 // API call function
 const addTransaction = async (transactionData) => {
   try {
-    const response = await axios.post('https://ledger-transactions.onrender.com/', transactionData);
+    const response = await axios.post('https://ledger-transactions.onrender.com/api/transactions', transactionData);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.error || 'Error adding transaction');
@@ -21,7 +21,7 @@ const TransactionForm = () => {
   const [date, setDate] = useState('2024-06-05'); 
   const [transactionType, setTransactionType] = useState('Taken'); 
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,8 +52,8 @@ const TransactionForm = () => {
         amount: parseFloat(amount).toFixed(2), 
         transactionType,
       });
+      alert("transaction added")
       
-      navigate(`/ledger/${ledgerId}`); 
     } catch (error) {
       console.error('Failed to add transaction:', error);
       setError(error.message || 'Failed to add transaction. Please try again.');

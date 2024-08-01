@@ -3,6 +3,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
 const PdfReportComponent = ({ transactions, ledgerId, startDate, endDate }) => {
+    
   const generatePdf = () => {
     // Initialize jsPDF
     const doc = new jsPDF();
