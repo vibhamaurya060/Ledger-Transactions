@@ -120,12 +120,10 @@
   
     .nav-items {
       flex-direction: column;
-      gap: 15px;
+      margin-left: 65%;
+      gap: 28px;
       margin-top: 15px;
     }
-  
-    .post-blog-link {
-      margin-top: 15px;
-    }
+
   }
   
