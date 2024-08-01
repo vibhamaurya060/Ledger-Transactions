@@ -120,7 +120,7 @@
   
     .nav-items {
       flex-direction: column;
-      margin-left: 65%;
+      margin-left: 60%;
       gap: 28px;
       margin-top: 15px;
     }
