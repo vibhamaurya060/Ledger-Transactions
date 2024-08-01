@@ -7,11 +7,12 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
+    margin-top: 5%;
   }
   
   .transaction-form h2 {
     text-align: center;
-    color: #333;
+    color: #f669af;
     margin-bottom: 20px;
   }
   
@@ -33,7 +34,7 @@
   }
   
   .transaction-form input[type="number"] {
-    -moz-appearance: textfield; /* Hide spinner for number input */
+    -moz-appearance: textfield;
   }
   
   .transaction-form input[type="number"]::-webkit-inner-spin-button,
@@ -45,7 +46,7 @@
   .transaction-form button {
     width: 100%;
     padding: 10px;
-    background-color: #f669af; /* Orange color */
+    background-color: #ff86c2;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -55,6 +56,6 @@
   }
   
   .transaction-form button:hover {
-    background-color: #f5449c; /* Darker shade of orange */
+    background-color: #f658a7;
   }
   

@@ -45,7 +45,7 @@ const Dashboard = () => {
                <br/>
                <br/>
                 <button 
-                  style={{width:"100px", height:"35px", border:"none", borderRadius:"5px", backgroundColor:"lightpink", color:"white", fontWeight:"600"}} 
+                  style={{width:"100px", height:"35px", border:"none", borderRadius:"5px", backgroundColor:"#ff86c2", color:"white", fontWeight:"600"}} 
                   onClick={() => navigate(`/transactions/${ledger._id}`)}
                 >
                   Transactions

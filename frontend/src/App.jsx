@@ -17,18 +17,15 @@ import LedgerTransactions from './components/LedgerTransaction';
 
 function App() {
  
-
   return (
     <Router>
       <div className="App">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/" element={<Dashboard />} /> */}
           <Route path="/transactions/:id" element={<LedgerTransactions />} />
           <Route path="/ledgerForm" element={<LedgerForm/>} />
           <Route path="/transactionForm" element={<TransactionForm />} />
-
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           

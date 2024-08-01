@@ -32,14 +32,14 @@
     text-align: center;
     margin-left: 35%;
     margin-top: 6%;
-   background-color: #f9e6f5;
+   background-color: #f4f8fc;
     
   }
   
   .login-container h2 {
     margin-bottom: 30px;
     font-size: 24px;
-    color: gray;
+    color: #f669af;
   }
   
   .login-form {

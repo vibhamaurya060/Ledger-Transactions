@@ -6,7 +6,7 @@ import '../style/transactionForm.css';
 // API call function
 const addTransaction = async (transactionData) => {
   try {
-    const response = await axios.post('https://ledger-transactions.onrender.com/api/transactions', transactionData);
+    const response = await axios.post('https://ledger-transactions.onrender.com/', transactionData);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.error || 'Error adding transaction');
@@ -49,10 +49,11 @@ const TransactionForm = () => {
         ledgerId,
         date,
         ledgerName,
-        amount: parseFloat(amount).toFixed(2), // Convert amount to a float with two decimal places
+        amount: parseFloat(amount).toFixed(2), 
         transactionType,
       });
-      navigate(`/ledger/${ledgerId}`); // Use navigate for redirection
+      
+      navigate(`/ledger/${ledgerId}`); 
     } catch (error) {
       console.error('Failed to add transaction:', error);
       setError(error.message || 'Failed to add transaction. Please try again.');

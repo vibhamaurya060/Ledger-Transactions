@@ -29,8 +29,7 @@ exports.getAllTransactions = async (req, res) => {
   }
 };
 
-/////////////////////
-
+/////
 
 exports.getTransactions = async (req, res) => {
   const { ledgerId, startDate, endDate } = req.query;
@@ -45,8 +44,8 @@ exports.getTransactions = async (req, res) => {
 
   try {
     // Set default values if dates are not provided
-    parsedStartDate = startDate ? new Date(startDate) : new Date(0); // January 1, 1970
-    parsedEndDate = endDate ? new Date(endDate) : new Date(); // Current date
+    parsedStartDate = startDate ? new Date(startDate) : new Date(0); 
+    parsedEndDate = endDate ? new Date(endDate) : new Date(); 
 
     // Check if dates are valid
     if (isNaN(parsedStartDate.getTime()) || isNaN(parsedEndDate.getTime())) {

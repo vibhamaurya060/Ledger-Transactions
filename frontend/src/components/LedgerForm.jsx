@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import '../style/ledgerForm.css'; // Import your CSS file
+import '../style/ledgerForm.css'; 
 
 // API call function
 const createLedger = async (ledgerData) => {
